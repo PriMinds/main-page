@@ -2,81 +2,82 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="public/errunds_favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/assets/errunds_favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="src/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <title>PriMinds</title>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('demo-form');
-        const submitBtn = document.getElementById('submit-button');
-        const thankYouMsg = document.getElementById('thank-you');
-        const openBtn = document.getElementById('open-modal');
-        const closeBtn = document.getElementById('close-modal');
-        const modal = document.getElementById('modal');
-        const overlay = document.getElementById('overlay');
 
-        openBtn.addEventListener('click', () => {
-          modal.classList.remove('hidden');
-          document.body.classList.add('overflow-hidden');
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('demo-form');
+            const submitBtn = document.getElementById('submit-button');
+            const thankYouMsg = document.getElementById('thank-you');
+            const openBtn = document.getElementById('open-modal');
+            const closeBtn = document.getElementById('close-modal');
+            const modal = document.getElementById('modal');
+            const overlay = document.getElementById('overlay');
 
-          form.classList.remove('hidden', 'opacity-0');
-          thankYouMsg.classList.add('hidden', 'opacity-0');
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit';
-          form.reset(); // optional: clears input
-        });
+            openBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
 
-        const closeModal = () => {
-          modal.classList.add('hidden');
-          document.body.classList.remove('overflow-hidden');
-        };
-
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-
-          // Disable button + show loading text
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Submitting...';
-
-          const data = new FormData(form);
-          fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(data).toString(),
-          })
-            .then(() => {
-              // Fade out form
-              form.classList.add('opacity-0');
-              setTimeout(() => {
-                form.classList.add('hidden');
-                thankYouMsg.classList.remove('hidden');
-                thankYouMsg.classList.add('opacity-100');
-
-                // Optional: auto-close modal after 3s
-                setTimeout(() => {
-                  modal.classList.add('hidden');
-                  document.body.classList.remove('overflow-hidden');
-                }, 3000);
-              }, 300);
-            })
-            .catch(() => {
-              alert('Something went wrong. Please try again.');
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Submit';
+                form.classList.remove('hidden', 'opacity-0');
+                thankYouMsg.classList.add('hidden', 'opacity-0');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+                form.reset(); // optional: clears input
             });
-        });
 
-        closeBtn.addEventListener('click', closeModal);
-        overlay.addEventListener('click', closeModal);
-      });
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            };
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Disable button + show loading text
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+
+                const data = new FormData(form);
+                fetch("/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(data).toString(),
+                })
+                    .then(() => {
+                        // Fade out form
+                        form.classList.add('opacity-0');
+                        setTimeout(() => {
+                            form.classList.add('hidden');
+                            thankYouMsg.classList.remove('hidden');
+                            thankYouMsg.classList.add('opacity-100');
+
+                            // Optional: auto-close modal after 3s
+                            setTimeout(() => {
+                                modal.classList.add('hidden');
+                                document.body.classList.remove('overflow-hidden');
+                            }, 3000);
+                        }, 300);
+                    })
+                    .catch(() => {
+                        alert('Something went wrong. Please try again.');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Submit';
+                    });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            overlay.addEventListener('click', closeModal);
+        });
     </script>
   </head>
     <body class="text-carbon">
       <header class="sticky top-0 flex items-center justify-between px-6 h-16 bg-white shadow-sm">
-        <img src="public/errunds_logo.svg" alt="" class="h-10 w-auto">
-        <div class="hidden sm:flex items-center font-semibold">
+        <img src="/assets/errunds_logo.svg" alt="" class="h-10 w-auto">
+        <div class="sm:flex items-center font-semibold">
           <nav class="space-x-12">
             <a href="#" class="hover:underline underline-offset-4 decoration-runner-green-500 decoration-2">Home</a>
             <a href="#features" class="hover:underline underline-offset-4 decoration-runner-green-500 decoration-2">Services</a>
@@ -94,100 +95,57 @@
             <p class="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed">
               Consulting company based in Metro Vancouver, Canada
             </p>
-<!--            <button id="open-modal" class="bg-runner-green-500 hover:bg-green-700 w-1/4 text-white font-medium py-2 px-6 rounded transition duration-200 text-center">-->
-<!--              Request Demo-->
-<!--            </button>-->
           </div>
-          <img src="public/landing.svg" alt="Landing Illustration" class="hidden md:block w-full max-w-[40%] h-auto">
+          <img src="/assets/landing.svg" alt="Landing Illustration" class="hidden md:block w-full max-w-[40%] h-auto">
         </div>
       </section>
-
-<!--      <section class="flex flex-col space-y-16">-->
-<!--        &lt;!&ndash; Feature 1 &ndash;&gt;-->
-<!--        <div class="flex flex-col-reverse md:flex-row items-center justify-center px-4 sm:px-6 gap-8 mt-16">-->
-<!--          <img src="public/mobile_app/personalized_task.png"-->
-<!--              alt="App Illustration"-->
-<!--              class="w-full md:w-1/4 object-contain h-1/2" />-->
-<!--          <div class="flex flex-col items-center space-y-4 text-left md:w-1/2">-->
-<!--            <h2 class="text-3xl sm:text-4xl font-semibold">Personalized Tasks</h2>-->
-<!--            <p class="text-slate-600 w-1/2">-->
-<!--              Select from a variety of pre-categorized tasks such as Shop/Buy, Errands, and Chores,-->
-<!--              or personalize your experience by creating a custom task that suits your specific needs.-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Feature 2 &ndash;&gt;-->
-<!--        <div class="flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 gap-8">-->
-<!--          <div class="flex flex-col items-center space-y-4 md:w-1/2 text-left">-->
-<!--            <h2 class="text-3xl sm:text-4xl font-semibold">Easy role switch</h2>-->
-<!--            <p class="text-slate-600 w-1/2">-->
-<!--              Seamlessly switch between roles—whether you're a Runner or a Customer—with just a tap,-->
-<!--              making it easy to manage tasks or offer help whenever you need to.-->
-<!--            </p>-->
-<!--          </div>-->
-<!--          <img src="public/mobile_app/easy_role_switch.png"-->
-<!--              alt="App Illustration"-->
-<!--              class="w-full md:w-1/3 object-contain h-1/2"/>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Feature 3 &ndash;&gt;-->
-<!--        <div class="flex flex-col-reverse md:flex-row items-center justify-center px-4 sm:px-6 gap-8">-->
-<!--          <img src="public/mobile_app/live_tracking.png"-->
-<!--              alt="App Illustration"-->
-<!--              class="w-full md:w-1/4 object-contain h-1/2"/>-->
-<!--          <div class="flex flex-col items-center space-y-4 text-left md:w-1/2">-->
-<!--            <h2 class="text-3xl sm:text-4xl font-semibold">Others</h2>-->
-<!--              <p class="text-slate-600 w-1/2">-->
-<!--                Stay updated in real-time with live tracking—monitor task progress, see your Runner’s location,-->
-<!--                and enjoy peace of mind every step of the way.-->
-<!--              </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </section>-->
 
       <section id="features" class="text-center px-4 pt-16 bg-white">
         <h2 class="text-4xl font-bold mb-12">Our Services</h2>
       
-        <div class="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
           <div class="w-70 p-6 text-center">
-            <img src="public/features/chat.svg" alt="Chat Icon" class="mx-auto mb-4 h-12 w-12">
+            <img src="/assets/features/chat.svg" alt="Chat Icon" class="mx-auto mb-4 h-12 w-12">
             <h3 class="text-xl font-semibold mb-2">Project Management Office</h3>
                <p>PMO Set-up</p>
                <p>PMIS Tool</p>
           </div>
 
           <div class="w-70 p-6 text-center">
-            <img src="public/features/scheduler.svg" alt="Clock Icon" class="mx-auto mb-4 h-12 w-12">
+            <img src="/assets/features/scheduler.svg" alt="Clock Icon" class="mx-auto mb-4 h-12 w-12">
             <h3 class="text-xl font-semibold mb-2">Project Portfolio Management</h3>
             <p>Project Intake</p>
               <p>Business Relationship Management</p>
           </div>
 
           <div class="w-70 p-6 text-center">
-            <img src="public/features/update.svg" alt="Bell Icon" class="mx-auto mb-4 h-12 w-12">
+            <img src="/assets/features/update.svg" alt="Bell Icon" class="mx-auto mb-4 h-12 w-12">
             <h3 class="text-xl font-semibold mb-2">Program Management</h3>
               <p>Integrated Program Planning</p>
               <p>Benefits Realization Management</p>
           </div>
 
+        </div>
+      </section>
+
+      <section id="features-2" class="text-center px-4 pt-16 bg-white">
+
+          <div class="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
           <div class="w-70 p-6 text-center">
-            <img src="public/features/task.svg" alt="Clipboard Icon" class="mx-auto mb-4 h-12 w-12">
-            <h3 class="text-xl font-semibold mb-2">Risk Management</h3>
-            <p>Monte Carlo Simulation</p>
+              <img src="/assets/features/task.svg" alt="Clipboard Icon" class="mx-auto mb-4 h-12 w-12">
+              <h3 class="text-xl font-semibold mb-2">Risk Management</h3>
+              <p>Monte Carlo Simulation</p>
           </div>
 
           <div class="w-70 p-6 text-center">
-            <img src="public/features/task.svg" alt="Clipboard Icon" class="mx-auto mb-4 h-12 w-12">
-            <h3 class="text-xl font-semibold mb-2">Others</h3>
+              <img src="/assets/features/task.svg" alt="Clipboard Icon" class="mx-auto mb-4 h-12 w-12">
+              <h3 class="text-xl font-semibold mb-2">Others</h3>
               <p>Project Management Training</p>
               <p>Project Management Career Consulting</p>
               <p>Artificial Intelligence (AI) Process Automation</p>
               <p>Mobile App Development</p>
           </div>
-
-        </div>
+          </div>
       </section>
 
       <section id="services" class="pt-16 pb-36 bg-white px-4 sm:px-6">
@@ -196,7 +154,7 @@
         <div class="flex flex-col lg:flex-row items-center justify-center gap-10 max-w-6xl mx-auto">
           <!-- Service Card 1 -->
           <div class="w-full max-w-sm bg-runner-green-100 rounded-xl shadow-md text-center overflow-hidden">
-            <img src="public/services/shopping.svg" alt="Shopping Icon" class="rounded-xl w-full h-64 object-contain">
+            <img src="/assets/b_and_a.png" alt="Shopping Icon" class="rounded-xl h-64 object-contain">
             <div class="p-6">
               <p><a href="https://www.baumann-associates.com/" target="_blank" rel="noopener noreferrer"
             class="bg-runner-green-500 hover:bg-green-700 text-white font-medium py-2 px-6 rounded transition duration-200 text-center">
@@ -207,7 +165,7 @@
 
           <!-- Service Card 2 -->
           <div class="w-full max-w-sm bg-runner-green-100 rounded-xl shadow-md text-center overflow-hidden">
-            <img src="public/services/errands.svg" alt="Errands Icon" class="rounded-xl w-full h-64 object-contain">
+            <img src="/assets/errunds.png" alt="Errands Icon" class="rounded-xl h-64 object-contain">
             <div class="p-6">
               <p><a href="https://errunds-preview.netlify.app/#contact-us" target="_blank" rel="noopener noreferrer"
             class="bg-runner-green-500 hover:bg-green-700 text-white font-medium py-2 px-6 rounded transition duration-200 text-center">
@@ -219,42 +177,8 @@
       </section>
 
       <section id="contact-us" class="flex flex-col items-center text-center bg-runner-green-100 py-24 px-4 space-y-6">
-        <h2 class="text-2xl font-semibold">Test Our App and Share Your Feedback!</h2>
-
-<!--        <p class="max-w-xl">-->
-<!--          We're inviting early users to test our prototype and share their thoughts.-->
-<!--          Your feedback helps us shape an app that truly works for you.-->
-<!--        </p>-->
-
-<!--        <p class="max-w-xl">-->
-<!--          Have a question? Feel free to contact us at <a href="mailto:runnertec2024@gmail.com" class="font-semibold">runnertec2024@gmail.com</a>-->
-<!--        </p>-->
-
-<!--        <div class="flex flex-col sm:flex-row gap-4 pt-4">-->
-<!--          <a href="https://forms.gle/TQ7cLVsA1iUXuatcA" target="_blank" rel="noopener noreferrer"-->
-<!--            class="bg-runner-green-500 hover:bg-green-700 text-white font-medium py-2 px-6 rounded transition duration-200 text-center">-->
-<!--            Survey Form-->
-<!--          </a>-->
-<!--        </div>-->
+       <img src="/assets/lets_chat.png" alt="Shopping Icon" class="rounded-xl h-64 object-contain">
       </section>
-
-<!--      <section class="flex flex-col text-center py-16">-->
-<!--        <h2 class="text-2xl font-semibold mb-2">Download the App</h2>-->
-<!--        <p class="text-lg mb-6">Available on iOS and Android</p>-->
-
-<!--        <div class="flex flex-row justify-center gap-4">-->
-<!--          <img-->
-<!--            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"-->
-<!--            alt="Download on the App Store"-->
-<!--            class="h-14 w-36 object-contain"-->
-<!--          />-->
-<!--          <img-->
-<!--            src="/google_play_badge.png"-->
-<!--            alt="Get it on Google Play"-->
-<!--            class="h-14 w-40 object-contain"-->
-<!--          />-->
-<!--        </div>-->
-<!--      </section>-->
 
       <footer class="bg-gray-800 text-white py-4">
         <div class="container mx-auto text-center">
